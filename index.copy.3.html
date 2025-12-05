@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEMON MUSIC GROUP</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        body {
+            font-family: 'Press Start 2P', cursive;
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .start-screen {
+            text-align: center;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .start-screen h1 {
+            font-size: 2.5rem;
+            color: #6a0dad;
+            margin-bottom: 2rem;
+        }
+
+        .start-button {
+            background-color: #6a0dad;
+            color: #ffffff;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 0.25rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-family: 'Press Start 2P', cursive;
+            box-shadow: 0 0 10px #6a0dad, 0 0 20px #6a0dad;
+        }
+
+        .start-button:hover {
+            background-color: #9f4dff;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #9f4dff, 0 0 30px #9f4dff;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="start-screen">
+        <h1>LEMON MUSIC GROUP</h1>
+        <button class="start-button" onclick="startGame()">START GAME</button>
+    </div>
+
+    <script>
+        function startGame() {
+            window.location.href = "lemon-navigation.html";
+        }
+    </script>
+</body>
+</html>

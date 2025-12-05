@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lemon Music Group – Contact & Promo Requests</title>
+
+    <!-- Retro Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Press Start 2P', cursive;
+            background-color: #000;
+            color: #40e0d0;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #40e0d0;
+            padding: 0.7rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #000;
+        }
+
+        .logo {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #000;
+        }
+
+        nav a {
+            color: #000;
+            text-decoration: none;
+            font-size: 0.7rem;
+        }
+
+        /* MAIN CONTAINER */
+        .container {
+            max-width: 90%;
+            margin: 2rem auto;
+            background-color: #111;
+            padding: 1.2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 0 15px rgba(64,224,208,0.3);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            color: #40e0d0;
+            font-size: 0.6rem;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            margin-top: .3rem;
+            margin-bottom: 1rem;
+            border-radius: 0.4rem;
+            border: 2px solid #40e0d0;
+            background-color: #000;
+            color: #fff;
+            font-family: 'Press Start 2P';
+            font-size: 0.65rem;
+        }
+
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: #40e0d0;
+            border: none;
+            border-radius: 0.4rem;
+            color: #000;
+            cursor: pointer;
+            font-family: 'Press Start 2P';
+            font-size: 0.8rem;
+        }
+
+        button:hover {
+            background-color: #2bb8b0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            margin-top: 3rem;
+            background-color: #40e0d0;
+            border-top: 3px solid #000;
+        }
+
+        footer p {
+            color: #000;
+            margin: 0;
+            font-size: 0.6rem;
+        }
+
+        /* MOBILE FIXES */
+        @media (max-width: 480px) {
+            .logo { font-size: 0.7rem; }
+            nav a { font-size: 0.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">LEMON MUSIC GROUP</div>
+    <nav>
+        <a href="lemon-navigation.html">Menu</a>
+    </nav>
+</header>
+
+<div class="container">
+    <h1>CONTACT & PROMO REQUESTS</h1>
+
+    <form action="https://formspree.io/f/mqalwljw" method="POST">
+
+        <label>Your Name</label>
+        <input type="text" name="name" placeholder="Enter your name" required>
+
+        <label>Your Email</label>
+        <input type="email" name="email" placeholder="Enter your email" required>
+
+        <label>Request Type</label>
+        <input type="text" name="type" placeholder="Promo, Feature, Mixing etc." required>
+
+        <label>Your Message</label>
+        <textarea name="message" placeholder="Write your request..."></textarea>
+
+        <button type="submit">SEND REQUEST</button>
+    </form>
+</div>
+
+<footer>
+    <p>&copy; 2025 Lemon Music Group. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

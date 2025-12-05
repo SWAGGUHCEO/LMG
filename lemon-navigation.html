@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LEMON MUSIC GROUP Navigation</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+<style>
+    body {
+        font-family: 'Press Start 2P', cursive;
+        margin: 0;
+        padding: 0;
+        background-color: #000;
+        color: #ff00ff;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    header {
+        background-color: #000;
+        color: #ff00ff;
+        padding: 20px;
+        border-bottom: 3px solid #ff00ff;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 32px;
+        margin: 0;
+    }
+
+    .character-select {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        padding: 20px;
+    }
+
+    .nav-btn {
+        background: none;
+        border: none;
+        font-size: 2rem;
+        color: #ff00ff;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+    }
+
+    .nav-btn:hover {
+        transform: scale(1.2);
+        color: #ff66ff;
+    }
+
+    .nav-item {
+        background-color: #333;
+        color: #ff00ff;
+        padding: 20px;
+        border-radius: 15px;
+        border: 3px solid #ff00ff;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 250px;
+        height: 150px;
+        transition: transform 0.3s, background-color 0.3s;
+        box-shadow: 0 0 10px #ff00ff;
+        text-align: center;
+    }
+
+    .nav-item:hover {
+        background-color: #ff00ff;
+        color: #000;
+        transform: scale(1.05);
+        box-shadow: 0 0 15px #ff00ff, 0 0 30px #ff00ff;
+    }
+
+    footer {
+        background-color: #000;
+        color: #ff00ff;
+        text-align: center;
+        padding: 20px;
+        border-top: 3px solid #ff00ff;
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>LEMON MUSIC GROUP</h1>
+</header>
+
+<div class="character-select">
+    <button id="prevBtn" class="nav-btn">⟵</button>
+    <a id="charLink" class="nav-item" href="#">Loading...</a>
+    <button id="nextBtn" class="nav-btn">⟶</button>
+</div>
+
+<footer>
+    <p>&copy; 2025 Lemon Music Group. All rights reserved.</p>
+</footer>
+
+<script>
+    const links = [
+        { text: "Home", url: "index.copy.3.html" },
+        { text: "Request/Contact", url: "index.copy.22.html" },
+        { text: "Merch", url: "index.copy.6.html" },
+        { text: "Contest", url: "index.copy.16.html" },
+        { text: "LMG Partner", url: "index.copy.17.html" },
+        { text: "Events", url: "index.copy.18.html" },
+        { text: "News", url: "index.copy.19.html" },
+        { text: "PLAY", url: "swagguh.skate.html" },
+        { text: "Spotify Playlist", url: "https://open.spotify.com/playlist/1P9dLvyHcqbQIburO45APF" },
+        { text: "SoundCloud Playlist", url: "https://on.soundcloud.com/8H4SzS9fmWVFc5sv8" },
+        { text: "TikTok", url: "https://www.tiktok.com/@swagguhmusix" },
+        { text: "Instagram", url: "https://www.instagram.com/swagguhmusix" },
+        { text: "YouTube", url: "https://www.youtube.com/@SWAGGUHMUSIX" },
+        { text: "X", url: "https://x.com/swagguhmusix" }
+    ];
+
+    let currentIndex = 0;
+    const charLink = document.getElementById('charLink');
+
+    function updateCharacter() {
+        charLink.textContent = links[currentIndex].text;
+        charLink.href = links[currentIndex].url;
+    }
+
+    document.getElementById('prevBtn').addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + links.length) % links.length;
+        updateCharacter();
+    });
+
+    document.getElementById('nextBtn').addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % links.length;
+        updateCharacter();
+    });
+
+    updateCharacter();
+</script>
+
+</body>
+</html>

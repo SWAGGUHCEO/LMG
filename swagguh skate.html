@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lemon Music Group Skateboard Jump</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+    <style>
+        body {
+            font-family: 'Press Start 2P', cursive;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #ff00ff;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+            margin: 0 auto;
+            background-color: #87CEEB;
+            border: 2px solid #ff00ff;
+        }
+
+        .score {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 20px;
+        }
+
+        .game-over {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-size: 24px;
+            color: #ff00ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="score">Score: <span id="score">0</span></div>
+    <canvas id="gameCanvas" width="800" height="400"></canvas>
+    <div class="game-over" id="gameOver">
+        <p>Game Over!</p>
+        <p>Your Score: <span id="finalScore">0</span></p>
+        <button onclick="restartGame()">Restart</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const skateboard = {
+            x: 50,
+            y: canvas.height - 70,
+            width: 50,
+            height: 20,
+            color: '#0000ff',
+            dy: 0,
+            gravity: 0.5,
+            jumpPower: -10,
+            grounded: true,
+            doubleJumped: false,
+            tripleJumped: false,
+            score: 0
+        };
+
+        const obstacles = [];
+        let obstacleSpeed = 5;
+        let gameRunning = true;
+        let canTripleJump = false;
+
+        function drawSkateboard() {
+            ctx.fillStyle = skateboard.color;
+            ctx.fillRect(skateboard.x, skateboard.y, skateboard.width, skateboard.height);
+        }
+
+        function drawObstacles() {
+            ctx.fillStyle = '#000';
+            obstacles.forEach(obstacle => {
+                ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+            });
+        }
+
+        function updateObstacles() {
+            obstacles.forEach(obstacle => {
+                obstacle.x -= obstacleSpeed;
+            });
+
+            if (obstacles.length && obstacles[0].x + obstacles[0].width < 0) {
+                obstacles.shift();
+                skateboard.score++;
+                document.getElementById('score').textContent = skateboard.score;
+            }
+
+            if (Math.random() < 0.02) {
+                const obstacleHeight = Math.random() > 0.5 ? 50 : 30;
+                obstacles.push({
+                    x: canvas.width,
+                    y: canvas.height - obstacleHeight,
+                    width: 20,
+                    height: obstacleHeight
+                });
+            }
+
+            if (Math.random() < 0.01 && !canTripleJump) {
+                // Fügt ein Triple-Jump-Power-Up hinzu
+                obstacles.push({
+                    x: canvas.width,
+                    y: canvas.height - 80,
+                    width: 20,
+                    height: 20,
+                    isPowerUp: true
+                });
+            }
+        }
+
+        function updateSkateboard() {
+            skateboard.y += skateboard.dy;
+            if (skateboard.y + skateboard.height < canvas.height) {
+                skateboard.dy += skateboard.gravity;
+                skateboard.grounded = false;
+            } else {
+                skateboard.y = canvas.height - skateboard.height;
+                skateboard.dy = 0;
+                skateboard.grounded = true;
+                skateboard.doubleJumped = false;
+                skateboard.tripleJumped = false;
+            }
+        }
+
+        function detectCollision() {
+            for (const obstacle of obstacles) {
+                if (
+                    skateboard.x < obstacle.x + obstacle.width &&
+                    skateboard.x + skateboard.width > obstacle.x &&
+                    skateboard.y < obstacle.y + obstacle.height &&
+                    skateboard.y + skateboard.height > obstacle.y
+                ) {
+                    if (obstacle.isPowerUp) {
+                        canTripleJump = true;
+                        obstacles.splice(obstacles.indexOf(obstacle), 1);
+                    } else {
+                        endGame();
+                    }
+                }
+            }
+        }
+
+        function gameLoop() {
+            if (!gameRunning) return;
+
+            ctx.fillStyle = '#87CEEB';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            drawSkateboard();
+            drawObstacles();
+            updateObstacles();
+            updateSkateboard();
+            detectCollision();
+            requestAnimationFrame(gameLoop);
+        }
+
+        function endGame() {
+            gameRunning = false;
+            document.getElementById('finalScore').textContent = skateboard.score;
+            document.getElementById('gameOver').style.display = 'block';
+        }
+
+        function restartGame() {
+            skateboard.score = 0;
+            obstacles.length = 0;
+            gameRunning = true;
+            canTripleJump = false;
+            document.getElementById('score').textContent = skateboard.score;
+            document.getElementById('gameOver').style.display = 'none';
+            gameLoop();
+        }
+
+        document.addEventListener('keydown', event => {
+            if (event.code === 'Space') {
+                if (skateboard.grounded) {
+                    skateboard.dy = skateboard.jumpPower;
+                    skateboard.grounded = false;
+                } else if (!skateboard.doubleJumped) {
+                    skateboard.dy = skateboard.jumpPower;
+                    skateboard.doubleJumped = true;
+                } else if (!skateboard.tripleJumped && canTripleJump) {
+                    skateboard.dy = skateboard.jumpPower;
+                    skateboard.tripleJumped = true;
+                }
+            }
+        });
+
+        gameLoop();
+    </script>
+</body>
+</html>

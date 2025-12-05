@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swagguh Musix is loading...</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #FF69B4; /* Barbie Pink Background */
+            color: #fff;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 3rem;
+            text-align: center;
+        }
+        #countdown {
+            font-size: 5rem;
+            color: #fff; /* White text */
+        }
+    </style>
+</head>
+<body>
+    <div id="countdown">3</div>
+    <script>
+        let countdownNumber = 3;
+        const countdownElement = document.getElementById('countdown');
+        
+        const countdownInterval = setInterval(() => {
+            if (countdownNumber > 0) {
+                countdownElement.textContent = countdownNumber;
+                countdownNumber--;
+            } else {
+                clearInterval(countdownInterval);
+                showText();
+            }
+        }, 1000); // Interval set to 1000ms (1 second) for a countdown effect
+
+        function showText() {
+            let count = 0;
+            const repeatInterval = setInterval(() => {
+                count++;
+                if (count <= 3) {
+                    countdownElement.textContent = 'you r trapped gang';
+                } else {
+                    clearInterval(repeatInterval);
+                    countdownElement.textContent = 'Lemon Music Group';
+                    setTimeout(() => {
+                        window.location.href = 'index.copy.3.html'; // Redirect to desired page
+                    }, 1000); // Delay set to 1000ms (1 second) before redirecting
+                }
+            }, 800); // Interval adjusted to display text
+        }
+    </script>
+</body>
+</html>
