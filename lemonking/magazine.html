@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Magazine</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+body{
+background:#050505;
+color:white;
+font-family:Inter,sans-serif;
+}
+
+.glass{
+background:rgba(255,255,255,.04);
+backdrop-filter:blur(18px);
+border:1px solid rgba(255,255,255,.08);
+}
+</style>
+</head>
+
+<body class="px-4 pb-10">
+
+<header class="sticky top-4 z-50">
+
+<div class="glass rounded-2xl px-5 py-4 flex justify-between items-center">
+
+<a href="index.html" class="font-black text-lg tracking-[3px]">
+LEMON MAGAZINE
+</a>
+
+<a href="checkout.html" class="text-lime-300 text-sm uppercase">
+Cart
+</a>
+
+</div>
+
+</header>
+
+<section class="pt-24 text-center pb-14">
+
+<p class="text-lime-300 uppercase tracking-[5px] text-sm mb-5">
+Digital Issue 001
+</p>
+
+<h1 class="text-5xl font-black leading-[0.95] mb-6">
+THE FUTURE<br>
+OF MUSIC
+</h1>
+
+<p class="text-zinc-400 leading-relaxed max-w-sm mx-auto">
+Exclusive interviews, underground culture and modern branding.
+</p>
+
+</section>
+
+<section>
+
+<div class="glass rounded-[32px] overflow-hidden">
+
+<div class="h-[380px] bg-zinc-800"></div>
+
+<div class="p-6">
+
+<h2 class="text-4xl font-black mb-4">
+LEMON MAGAZINE #001
+</h2>
+
+<p class="text-zinc-400 leading-relaxed mb-8">
+100+ pages about music culture,
+internet aesthetics and artist growth.
+</p>
+
+<div class="flex justify-between items-center mb-8">
+
+<div>
+<p class="text-zinc-500 text-sm uppercase">
+Price
+</p>
+
+<p class="text-4xl font-black text-lime-300">
+19€
+</p>
+</div>
+
+<div>
+<p class="text-zinc-500 text-sm uppercase">
+Format
+</p>
+
+<p class="font-black">
+PDF
+</p>
+</div>
+
+</div>
+
+<a href="#" class="w-full bg-lime-300 text-black py-5 rounded-2xl font-black uppercase tracking-[3px] block text-center transition hover:opacity-90">
+COMING SOON
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<script>
+function addMagazine(){
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+cart.push({
+name:"LEMON MAGAZINE #001",
+price:19
+});
+
+localStorage.setItem("cart", JSON.stringify(cart));
+
+window.location.href = "checkout.html";
+}
+</script>
+
+</body>
+</html>
