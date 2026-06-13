@@ -235,6 +235,9 @@ const hasBundle = cart.some(item => item.name === "LEAD NVR FOLLOW BUNDLE");
 const hasOneShots = cart.some(item => item.name === "LEAD NVR FOLLOW ONE-SHOTS");
 const hasLoops = cart.some(item => item.name === "LEAD NVR FOLLOW LOOPS");
 
+// King of Colosseum Kit
+const hasColosseum = cart.some(item => item.name === "KING OF COLOSSEUM");
+
 // Logik zur Weiterleitung an den passenden Link
 if (hasEmpire) {
     stripeUrl = "https://buy.stripe.com/6oU4gs9Pz2jM0qtbwRgQE06";
@@ -248,6 +251,8 @@ if (hasEmpire) {
     stripeUrl = "https://buy.stripe.com/28EcMYf9T0bE7SV6cxgQE08";
 } else if (hasLoops) {
     stripeUrl = "https://buy.stripe.com/3cI7sEd1LcYq7SVeJ3gQE07";
+} else if (hasColosseum) {
+    stripeUrl = "https://buy.stripe.com/14A8wI1j39Me8WZdEZgQE0a";
 } else {
     // Backup-Link falls irgendwas Unvorhergesehenes passiert
     stripeUrl = "https://buy.stripe.com/fZucMY1j36A25KNasNgQE02";
