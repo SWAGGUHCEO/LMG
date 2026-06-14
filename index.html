@@ -16,7 +16,8 @@
       theme:{
         extend:{
           colors:{
-            lemon:'#DFFF00'
+            lemon:'#DFFF00',
+            discord:'#5865F2'
           }
         }
       }
@@ -83,6 +84,7 @@
         <a href="kits.html">Kits</a>
         <a href="promo.html">Promo</a>
         <a href="magazine.html">Magazine</a>
+        <a href="https://discord.gg/d7WxeECVcq" target="_blank" class="text-discord font-bold">Discord</a>
         <a href="checkout.html" class="text-lemon">Cart</a>
 
       </div>
@@ -94,28 +96,33 @@
   <!-- HERO -->
   <section class="pt-24 pb-20 text-center">
 
-    <p class="text-zinc-400 uppercase tracking-[5px] text-sm mb-6">
-      Music Collective
+    <p class="text-lemon uppercase tracking-[5px] text-sm mb-6 font-bold">
+      LAUNCH WEEK SALE ON ALL KITS
     </p>
 
     <h1 class="text-5xl leading-[0.9] font-black gradient">
       STOP MAKING BORING BEATS!<br>
-      LAUNCH WEEK SALE ON ALL KITS.
+      UPGRADE YOUR SOUNDS.
     </h1>
 
     <p class="mt-8 text-zinc-400 leading-relaxed max-w-md mx-auto">
-      Limited price drops on every pack. Click below to unlock the sale or grab the Limited Bundle deal.
+      Get instant access to industry-standard sound kits, or join our community to connect with top-tier producers.
     </p>
 
-    <div class="mt-10 flex flex-col gap-4">
+    <div class="mt-10 flex flex-col gap-4 max-w-sm mx-auto w-full">
 
       <a href="kits.html"
-      class="bg-lemon text-black py-4 rounded-2xl font-black uppercase tracking-[3px]">
+      class="bg-lemon text-black py-4 rounded-2xl font-black uppercase tracking-[3px] text-center transition hover:opacity-90">
         Explore Kits
       </a>
 
+      <a href="https://discord.gg/d7WxeECVcq" target="_blank"
+      class="bg-discord text-white py-4 rounded-2xl font-black uppercase tracking-[3px] text-center transition hover:opacity-90 flex items-center justify-center gap-2">
+        Join Our Discord
+      </a>
+
       <a href="promo.html"
-      class="glass py-4 rounded-2xl font-black uppercase tracking-[3px]">
+      class="glass py-3 rounded-2xl font-black uppercase tracking-[3px] text-center text-xs text-zinc-400 transition hover:bg-white/5">
         Promotion Services
       </a>
 
@@ -123,68 +130,35 @@
 
   </section>
 
-  <!-- ARTISTS -->
+  <!-- DISCORD COMMUNITY HIGHLIGHT -->
   <section class="pb-16">
 
-    <div class="flex justify-between items-center mb-6">
+    <div class="glass rounded-3xl p-6 border border-discord/30 relative overflow-hidden card">
+      
+      <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-discord/10 rounded-full blur-3xl pointer-events-none"></div>
 
-      <h2 class="text-3xl font-black">
-        Artists
+      <p class="text-discord uppercase tracking-[4px] text-xs font-bold mb-2">
+        Exclusive Producer Circle
+      </p>
+
+      <h2 class="text-3xl font-black mb-4">
+        JOIN THE LEMON HQ
       </h2>
 
-      <a href="#" class="text-lemon text-sm uppercase">
-        View All
+      <p class="text-zinc-400 leading-relaxed mb-6 text-sm">
+        Don't cook up alone. Join our community server to collaborate, get placement opportunities, and grab exclusive free daily loops.
+      </p>
+
+      <ul class="text-zinc-300 space-y-2 mb-6 text-xs uppercase tracking-wide">
+        <li>• ⚡ Free Daily Loops & Cookup Events</li>
+        <li>• 💎 Honest Beat Feedback & Advice</li>
+        <li>• 🤝 Placement Opportunities & Networks</li>
+      </ul>
+
+      <a href="https://discord.gg/d7WxeECVcq" target="_blank"
+      class="block w-full border border-discord text-discord hover:bg-discord hover:text-white py-4 rounded-2xl font-black uppercase tracking-[3px] text-center text-sm transition">
+        Connect On Discord
       </a>
-
-    </div>
-
-    <div class="space-y-5">
-
-      <!-- ARTIST -->
-      <div class="glass rounded-3xl p-5 card">
-
-        <div class="flex gap-4 items-center">
-
-          <div class="w-16 h-16 rounded-2xl bg-zinc-800"></div>
-
-          <div>
-
-            <h3 class="text-xl font-black">
-              ???
-            </h3>
-
-            <p class="text-zinc-400 text-sm">
-              Shhh.
-            </p>
-
-          </div>
-
-        </div>
-
-      </div>
-
-      <!-- ARTIST -->
-      <div class="glass rounded-3xl p-5 card">
-
-        <div class="flex gap-4 items-center">
-
-          <div class="w-16 h-16 rounded-2xl bg-zinc-800"></div>
-
-          <div>
-
-            <h3 class="text-xl font-black">
-              ???
-            </h3>
-
-            <p class="text-zinc-400 text-sm">
-              a secret.
-            </p>
-
-          </div>
-
-        </div>
-
-      </div>
 
     </div>
 
@@ -247,9 +221,9 @@
   <section class="grid grid-cols-2 gap-4">
 
     <a href="kits.html"
-    class="glass rounded-3xl p-6 text-center card">
+    class="glass rounded-3xl p-6 text-center card border border-lemon/20">
 
-      <h3 class="font-black text-xl mb-2">
+      <h3 class="font-black text-xl mb-2 text-lemon">
         Kits
       </h3>
 
@@ -259,15 +233,15 @@
 
     </a>
 
-    <a href="legal.html"
-    class="glass rounded-3xl p-6 text-center card">
+    <a href="https://discord.gg/d7WxeECVcq" target="_blank"
+    class="glass rounded-3xl p-6 text-center card border border-discord/20">
 
-      <h3 class="font-black text-xl mb-2">
-        Legal
+      <h3 class="font-black text-xl mb-2 text-discord">
+        Discord
       </h3>
 
       <p class="text-zinc-400 text-sm">
-        E-Mail
+        Community
       </p>
 
     </a>
