@@ -100,7 +100,6 @@ Review your items before continuing to Stripe.
 
 </section>
 
-<!-- SHOP NOTIFICATION / NEWS -->
 <div class="max-w-md mx-auto mb-8 glass border-l-2 border-l-lemon rounded-xl p-4 text-xs text-zinc-400 tracking-wide leading-relaxed">
     <span class="text-lemon font-bold uppercase block mb-1">System Update:</span>
     We are currently optimizing our checkout suite. Please place separate orders for different product categories (e.g. separate orders for Sound Kits and Promo Bundles). Thank you for your support! 🍋
@@ -160,7 +159,7 @@ cartItems.innerHTML = `
 <div class="glass rounded-3xl p-10 text-center">
 <p class="text-zinc-400 uppercase tracking-[4px] text-xs mb-3">Cart Empty</p>
 <h2 class="text-3xl font-black mb-3">No Products Yet</h2>
-<p class="text-zinc-500 mb-6">Add kits, promo or magazine products first.</p>
+<p class="text-zinc-500 mb-6">Add kits or promo products first.</p>
 <a href="kits.html" class="bg-lime-300 text-black px-6 py-3 rounded-2xl font-black uppercase tracking-[2px]">
 Browse Store
 </a>
@@ -175,6 +174,9 @@ cart.forEach((item,index)=>{
 
 total += item.price;
 
+// Korrekte Formatierung für Kommapreise wie 2,99€
+let displayPrice = item.price.toFixed(2).replace('.', ',');
+
 cartItems.innerHTML += `
 <div class="glass rounded-3xl p-5 card">
 
@@ -183,7 +185,7 @@ cartItems.innerHTML += `
 <div>
 <p class="text-zinc-500 text-xs uppercase tracking-[3px] mb-2">Product</p>
 <h3 class="text-2xl font-black">${item.name}</h3>
-<p class="text-lime-300 text-xl font-black mt-2">${item.price}€</p>
+<p class="text-lime-300 text-xl font-black mt-2">${displayPrice}€</p>
 </div>
 
 <button
@@ -199,7 +201,7 @@ Remove
 
 });
 
-document.getElementById("total").innerText = total + "€";
+document.getElementById("total").innerText = total.toFixed(2).replace('.', ',') + "€";
 
 }
 
@@ -225,37 +227,26 @@ return;
 
 let stripeUrl = "";
 
-// Promo Bundles
+// Promo Bundles (Bleiben aktiv)
 const hasEmpire = cart.some(item => item.name === "EMPIRE SUITE");
 const hasPro = cart.some(item => item.name === "PRO JUICE");
 const hasBasic = cart.some(item => item.name === "BASIC LEMON");
 
-// Lead nvr Follow Sound Kits
-const hasBundle = cart.some(item => item.name === "LEAD NVR FOLLOW BUNDLE");
-const hasOneShots = cart.some(item => item.name === "LEAD NVR FOLLOW ONE-SHOTS");
-const hasLoops = cart.some(item => item.name === "LEAD NVR FOLLOW LOOPS");
+// Das neue Sound Kit
+const hasJustASaw = cart.some(item => item.name === "JUST A SAW");
 
-// King of Colosseum Kit
-const hasColosseum = cart.some(item => item.name === "JUST A SAW");
-
-// Logik zur Weiterleitung an den passenden Link
+// Logik zur Weiterleitung an die passenden Stripe-Links
 if (hasEmpire) {
     stripeUrl = "https://buy.stripe.com/6oU4gs9Pz2jM0qtbwRgQE06";
 } else if (hasPro) {
     stripeUrl = "https://buy.stripe.com/eVq6oAgdX1fIa136cxgQE05";
 } else if (hasBasic) {
     stripeUrl = "https://buy.stripe.com/fZucMY1j36A25KNasNgQE02";
-} else if (hasBundle) {
-    stripeUrl = "https://buy.stripe.com/dRm28kf9T5vYc9beJ3gQE09";
-} else if (hasOneShots) {
-    stripeUrl = "https://buy.stripe.com/28EcMYf9T0bE7SV6cxgQE08";
-} else if (hasLoops) {
-    stripeUrl = "https://buy.stripe.com/3cI7sEd1LcYq7SVeJ3gQE07";
-} else if (hasColosseum) {
+} else if (hasJustASaw) {
     stripeUrl = "https://buy.stripe.com/cNidR22n76A2flndEZgQE0b";
 } else {
-    // Backup-Link falls irgendwas Unvorhergesehenes passiert
-    stripeUrl = "https://buy.stripe.com/fZucMY1j36A25KNasNgQE02";
+    // Backup-Link zur Sicherheit
+    stripeUrl = "https://buy.stripe.com/cNidR22n76A2flndEZgQE0b";
 }
 
 // Weiterleitung direkt zum sicheren Stripe-Zahlungsfenster
