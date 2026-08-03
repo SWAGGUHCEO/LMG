@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lemon Music Group | Global Label & Distribution Infrastructure</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --bg-obsidian: #060606;
+            --bg-surface: #101010;
+            --bg-surface-hover: #161616;
+            --platinum: #E5E5E5;
+            --text-muted: #737373;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --font-main: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-main);
+        }
+
+        body {
+            background-color: var(--bg-obsidian);
+            color: var(--platinum);
+            line-height: 1.5;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Executive Navigation & Mobile Hamburger */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 6%;
+            border-bottom: 1px solid var(--border-subtle);
+            background: rgba(6, 6, 6, 0.95);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.15rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--platinum);
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: color 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--platinum);
+        }
+
+        .nav-cta {
+            background: var(--platinum);
+            color: var(--bg-obsidian);
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .nav-cta:hover {
+            background: #FFFFFF;
+        }
+
+        /* Hamburger Menu Toggle Button (Hidden on Desktop) */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 5px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background: var(--platinum);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 7rem 6% 5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5.5vw, 6rem);
+            font-weight: 800;
+            text-transform: uppercase;
+            line-height: 1.05;
+            margin-bottom: 2rem;
+            letter-spacing: -2px;
+            max-width: 1100px;
+        }
+
+        h1 span {
+            color: var(--text-muted);
+        }
+
+        .hero-desc {
+            color: var(--text-muted);
+            font-size: 1.15rem;
+            max-width: 650px;
+            margin-bottom: 3rem;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        /* Action Group */
+        .btn-group {
+            display: flex;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--platinum);
+            color: var(--bg-obsidian);
+            padding: 1rem 2.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            transition: background 0.2s;
+            text-align: center;
+        }
+
+        .btn-primary:hover {
+            background: #FFFFFF;
+        }
+
+        .btn-secondary {
+            border: 1px solid var(--border-subtle);
+            color: var(--platinum);
+            background: transparent;
+            padding: 1rem 2.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            transition: border-color 0.2s;
+            text-align: center;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--platinum);
+        }
+
+        /* Authority Metrics Bar */
+        .metrics-bar {
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 3rem 6%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2.5rem;
+            max-width: 1400px;
+            margin: 0 auto 5rem;
+            width: 100%;
+        }
+
+        .metric-item h4 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--platinum);
+            letter-spacing: -1px;
+            margin-bottom: 0.3rem;
+        }
+
+        .metric-item p {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
+
+        /* B2B Capabilities & Loop Shop Grid */
+        .capabilities {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 6% 6rem;
+            width: 100%;
+        }
+
+        .section-header {
+            margin-bottom: 3.5rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .capability-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            padding: 2.5rem 2rem;
+            border-radius: 6px;
+            transition: background 0.2s, border-color 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .capability-card:hover {
+            background: var(--bg-surface-hover);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .capability-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+
+        .capability-card p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-link {
+            color: var(--platinum);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: opacity 0.2s;
+        }
+
+        .card-link:hover {
+            opacity: 0.7;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-subtle);
+            padding: 3rem 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            margin-top: auto;
+            text-transform: uppercase;
+        }
+
+        footer div {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        footer a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        footer a:hover {
+            color: var(--platinum);
+        }
+
+        /* Mobile Responsiveness Rules */
+        @media (max-width: 900px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 75%;
+                height: 100vh;
+                background: rgba(10, 10, 10, 0.98);
+                backdrop-filter: blur(15px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                padding: 4rem;
+                gap: 2.5rem;
+                transition: right 0.4s ease-in-out;
+                border-left: 1px solid var(--border-subtle);
+                box-shadow: -10px 0 30px rgba(0,0,0,0.8);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 1.1rem;
+            }
+
+            .nav-cta {
+                display: none; /* Hide top CTA in mobile menu drawer for simplicity */
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            /* Hamburger animation transform states */
+            .menu-toggle.active span:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .menu-toggle.active span:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .hero {
+                padding: 5rem 6% 3rem;
+            }
+
+            .btn-group {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+            }
+
+            footer {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            footer div {
+                justify-content: center;
+            }
+        }
+
+        /* Micro Fade In */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Executive Navigation -->
+    <nav>
+        <a href="index.html" class="logo">Lemon Music <span>Group</span></a>
+        
+        <div class="nav-links" id="navLinks">
+            <a href="index.html" class="active">Infrastructure</a>
+            <a href="sync.html">Sync & Licensing</a>
+            <a href="distribution.html">Distribution</a>
+            <a href="shop.html">Loop Shop</a>
+            <a href="contact.html">Contact</a>
+        </div>
+
+        <a href="contact.html" class="nav-cta">Partner Portal</a>
+
+        <!-- Mobile Hamburger Trigger -->
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero fade-in">
+        <div class="hero-tag">Global Independent Label & Distribution Infrastructure</div>
+        <h1>Scaling Independent Music <span>To Global Markets.</span></h1>
+        <p class="hero-desc">Lemon Music Group operates as a high-performance publishing, label services, and global distribution partner for established independent artists, record labels, and institutional media buyers.</p>
+        <div class="btn-group">
+            <a href="contact.html" class="btn-primary">Initiate Partnership</a>
+            <a href="shop.html" class="btn-secondary">Browse Loop Shop</a>
+        </div>
+    </header>
+
+    <!-- Authority Metrics -->
+    <section class="metrics-bar fade-in">
+        <div class="metric-item">
+            <h4>150+</h4>
+            <p>Global Digital Outlets</p>
+        </div>
+        <div class="metric-item">
+            <h4>50M+</h4>
+            <p>Aggregated Streams</p>
+        </div>
+        <div class="metric-item">
+            <h4>Tier-1</h4>
+            <p>Sync & Brand Placements</p>
+        </div>
+        <div class="metric-item">
+            <h4>100%</h4>
+            <p>Transparent Rights</p>
+        </div>
+    </section>
+
+    <!-- Capabilities & Loop Shop Integration -->
+    <section class="capabilities fade-in">
+        <div class="section-header">
+            <h2>Core Infrastructure & Assets</h2>
+            <p>Engineered for high-volume rights holders, professional labels, and modern creators.</p>
+        </div>
+        <div class="grid-3">
+            <div class="capability-card">
+                <div>
+                    <h3>Global Distribution</h3>
+                    <p>Direct delivery pipeline to Spotify, Apple Music, Beatport, and over 150 international DSPs with real-time analytics.</p>
+                </div>
+                <a href="distribution.html" class="card-link">Learn More &rarr;</a>
+            </div>
+            <div class="capability-card">
+                <div>
+                    <h3>Sync & Licensing</h3>
+                    <p>Proactive pitching for advertising campaigns, film, television, and gaming networks through direct agency connections.</p>
+                </div>
+                <a href="sync.html" class="card-link">View Placements &rarr;</a>
+            </div>
+            <div class="capability-card">
+                <div>
+                    <h3>Sound & Loop Shop</h3>
+                    <p>Professional production-ready loops, sound kits, and custom stems built specifically for top-tier creators and producers.</p>
+                </div>
+                <a href="shop.html" class="card-link" style="color: #fff;">Open Loop Shop &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Lemon Music Group. All rights reserved.</p>
+        <div>
+            <a href="shop.html">Loop Shop</a>
+            <a href="legal.html">Legal & Privacy</a>
+            <a href="contact.html">Inquiries</a>
+        </div>
+    </footer>
+
+    <!-- Script for Mobile Menu & Animations -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Mobile Menu Toggle Logic
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+
+            menuToggle.addEventListener('click', () => {
+                menuToggle.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+
+            // Close menu when clicking any link on mobile
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    menuToggle.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
+
+            // Intersection Observer for smooth fades
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+            
+            setTimeout(() => {
+                document.querySelector('.hero').classList.add('visible');
+            }, 100);
+        });
+    </script>
+
+</body>
+</html>

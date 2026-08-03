@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lemon Music Group | Loop & Sound Shop</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --bg-obsidian: #060606;
+            --bg-surface: #101010;
+            --bg-surface-hover: #161616;
+            --platinum: #E5E5E5;
+            --text-muted: #737373;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --font-main: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-main);
+        }
+
+        body {
+            background-color: var(--bg-obsidian);
+            color: var(--platinum);
+            line-height: 1.5;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Executive Navigation & Mobile Hamburger */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 6%;
+            border-bottom: 1px solid var(--border-subtle);
+            background: rgba(6, 6, 6, 0.95);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.15rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--platinum);
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: color 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--platinum);
+        }
+
+        /* Cart Trigger Button */
+        .cart-btn {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            color: var(--platinum);
+            padding: 0.6rem 1rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: border-color 0.2s;
+        }
+
+        .cart-btn:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .cart-count {
+            background: var(--platinum);
+            color: var(--bg-obsidian);
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+        }
+
+        /* Hamburger Menu Toggle Button */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 5px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background: var(--platinum);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        /* Shop Hero */
+        .shop-hero {
+            padding: 6rem 6% 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .shop-hero-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+            margin-bottom: 1.2rem;
+            font-weight: 600;
+        }
+
+        .shop-hero h1 {
+            font-size: clamp(2.2rem, 4.5vw, 4.5rem);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -1.5px;
+            margin-bottom: 1rem;
+        }
+
+        .shop-hero p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+        }
+
+        /* Shop Grid / Catalog Layout */
+        .shop-container {
+            max-width: 1400px;
+            margin: 0 auto 6rem;
+            padding: 0 6%;
+            width: 100%;
+        }
+
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 6px;
+            overflow: hidden;
+            transition: transform 0.2s, border-color 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .product-header {
+            background: #141414;
+            padding: 2rem;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .product-badge {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-subtle);
+            padding: 4px 10px;
+            border-radius: 3px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .product-price {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--platinum);
+            letter-spacing: -0.5px;
+        }
+
+        .product-body {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            justify-content: space-between;
+        }
+
+        .product-body h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.8rem;
+        }
+
+        .product-body p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .product-specs {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 1rem 0;
+        }
+
+        .product-specs span strong {
+            color: var(--platinum);
+            display: block;
+            font-size: 0.85rem;
+            margin-top: 2px;
+        }
+
+        .btn-add {
+            background: var(--text-muted);
+            color: var(--bg-obsidian);
+            width: 100%;
+            padding: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-align: center;
+            border: none;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        /* Slide-out Cart Drawer */
+        .cart-drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .cart-drawer-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: 100%;
+            max-width: 420px;
+            height: 100vh;
+            background: var(--bg-surface);
+            border-left: 1px solid var(--border-subtle);
+            z-index: 2001;
+            display: flex;
+            flex-direction: column;
+            transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .cart-drawer.open {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 2rem;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h3 {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            font-weight: 800;
+        }
+
+        .cart-close {
+            background: none;
+            border: none;
+            color: var(--platinum);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .cart-body {
+            padding: 2rem;
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .cart-empty {
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 3rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cart-footer {
+            padding: 2rem;
+            border-top: 1px solid var(--border-subtle);
+            background: #0d0d0d;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .btn-checkout {
+            background: var(--platinum);
+            color: var(--bg-obsidian);
+            width: 100%;
+            padding: 1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-align: center;
+            transition: background 0.2s;
+            border: none;
+            cursor: pointer;
+            display: block;
+        }
+
+        .btn-checkout:hover {
+            background: #FFFFFF;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-subtle);
+            padding: 3rem 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            margin-top: auto;
+            text-transform: uppercase;
+        }
+
+        footer div {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        footer a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        footer a:hover {
+            color: var(--platinum);
+        }
+
+        /* Mobile Responsiveness Rules */
+        @media (max-width: 900px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 75%;
+                height: 100vh;
+                background: rgba(10, 10, 10, 0.98);
+                backdrop-filter: blur(15px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                padding: 4rem;
+                gap: 2.5rem;
+                transition: right 0.4s ease-in-out;
+                border-left: 1px solid var(--border-subtle);
+                box-shadow: -10px 0 30px rgba(0,0,0,0.8);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 1.1rem;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .menu-toggle.active span:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .menu-toggle.active span:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .shop-hero {
+                padding: 4rem 6% 2rem;
+            }
+
+            footer {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            footer div {
+                justify-content: center;
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Executive Navigation -->
+    <nav>
+        <a href="index.html" class="logo">Lemon Music <span>Group</span></a>
+        
+        <div class="nav-right">
+            <div class="nav-links" id="navLinks">
+                <a href="index.html">Infrastructure</a>
+                <a href="sync.html">Sync & Licensing</a>
+                <a href="distribution.html">Distribution</a>
+                <a href="shop.html" class="active">Loop Shop</a>
+                <a href="contact.html">Contact</a>
+            </div>
+
+            <!-- Cart Trigger -->
+            <button class="cart-btn" id="cartTrigger">
+                Cart <span class="cart-count" id="cartCount">0</span>
+            </button>
+
+            <!-- Mobile Hamburger Trigger -->
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Slide-out Cart Drawer -->
+    <div class="cart-drawer-overlay" id="cartOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="cart-close" id="cartClose">&times;</button>
+        </div>
+        <div class="cart-body" id="cartBody">
+            <p class="cart-empty">Your cart is currently empty.</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotalPrice">$0.00</span>
+            </div>
+            <button class="btn-checkout" id="checkoutBtn" onclick="handleCheckout()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Shop Hero -->
+    <header class="shop-hero fade-in">
+        <div class="shop-hero-tag">Professional Sound Design Assets</div>
+        <h1>Loop & Sound Shop</h1>
+        <p>Production-ready loops, custom melodic stems, and sound kits engineered for charting producers and commercial placements.</p>
+    </header>
+
+    <!-- Shop Catalog Grid -->
+    <section class="shop-container fade-in">
+        <div class="shop-grid">
+            
+            <!-- Product 1 -->
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-badge">WAV Stems & MIDI</span>
+                    <span class="product-price">$39.00</span>
+                </div>
+                <div class="product-body">
+                    <div>
+                        <h3>Dark Melodies Vol. I</h3>
+                        <p>10 Heavy melancholic loop compositions complete with separated track stems and precise MIDI files for ultimate control.</p>
+                        <div class="product-specs">
+                            <span>Format <strong>24-bit WAV</strong></span>
+                            <span>Files <strong>45 Stems</strong></span>
+                        </div>
+                    </div>
+                    <button class="btn-add" disabled>Temporarily Unavailable</button>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-badge">Sound Kit</span>
+                    <span class="product-price">$29.00</span>
+                </div>
+                <div class="product-body">
+                    <div>
+                        <h3>Urban Soundscape Toolkit</h3>
+                        <p>Essential one-shots, atmospheric textures, and processed percussion elements built for high-end modern production.</p>
+                        <div class="product-specs">
+                            <span>Format <strong>Stereo WAV</strong></span>
+                            <span>Files <strong>120 Elements</strong></span>
+                        </div>
+                    </div>
+                    <button class="btn-add" disabled>Temporarily Unavailable</button>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-badge">Sync Ready</span>
+                    <span class="product-price">$49.00</span>
+                </div>
+                <div class="product-body">
+                    <div>
+                        <h3>Cinematic Tension Pack</h3>
+                        <p>Deep sub-bases, evolving pads, and striking orchestral hits optimized for film, game, and commercial sync pitching.</p>
+                        <div class="product-specs">
+                            <span>Format <strong>Lossless</strong></span>
+                            <span>Files <strong>30 Compositions</strong></span>
+                        </div>
+                    </div>
+                    <button class="btn-add" disabled>Temporarily Unavailable</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Lemon Music Group. All rights reserved.</p>
+        <div>
+            <a href="index.html">Infrastructure</a>
+            <a href="contact.html">Legal & Inquiries</a>
+            <a href="distribution.html">Distribution</a>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Drawer & Interactions -->
+    <script>
+        let cart = [];
+
+        const cartTrigger = document.getElementById('cartTrigger');
+        const cartDrawer = document.getElementById('cartDrawer');
+        const cartOverlay = document.getElementById('cartOverlay');
+        const cartClose = document.getElementById('cartClose');
+        const cartBody = document.getElementById('cartBody');
+        const cartCount = document.getElementById('cartCount');
+        const cartTotalPrice = document.getElementById('cartTotalPrice');
+
+        function toggleCart() {
+            cartDrawer.classList.toggle('open');
+            cartOverlay.classList.toggle('open');
+        }
+
+        cartTrigger.addEventListener('click', toggleCart);
+        cartClose.addEventListener('click', toggleCart);
+        cartOverlay.addEventListener('click', toggleCart);
+
+        function handleCheckout() {
+            alert('Your cart is empty.');
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+
+            menuToggle.addEventListener('click', () => {
+                menuToggle.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    menuToggle.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+            
+            setTimeout(() => {
+                document.querySelector('.shop-hero').classList.add('visible');
+            }, 100);
+        });
+    </script>
+
+</body>
+</html>

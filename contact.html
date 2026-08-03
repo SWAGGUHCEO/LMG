@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lemon Music Group | Contact & Legal Disclosure</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --bg-obsidian: #060606;
+            --bg-surface: #101010;
+            --bg-surface-hover: #161616;
+            --platinum: #E5E5E5;
+            --text-muted: #737373;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --font-main: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-main);
+        }
+
+        body {
+            background-color: var(--bg-obsidian);
+            color: var(--platinum);
+            line-height: 1.5;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Executive Navigation & Mobile Hamburger */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 6%;
+            border-bottom: 1px solid var(--border-subtle);
+            background: rgba(6, 6, 6, 0.95);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.15rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--platinum);
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: color 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--platinum);
+        }
+
+        .nav-cta {
+            background: var(--platinum);
+            color: var(--bg-obsidian);
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .nav-cta:hover {
+            background: #FFFFFF;
+        }
+
+        /* Hamburger Menu Toggle Button */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 5px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background: var(--platinum);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        /* Contact Hero */
+        .contact-hero {
+            padding: 6rem 6% 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .contact-hero-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+            margin-bottom: 1.2rem;
+            font-weight: 600;
+        }
+
+        .contact-hero h1 {
+            font-size: clamp(2.2rem, 4.5vw, 4.5rem);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -1.5px;
+            margin-bottom: 1rem;
+        }
+
+        .contact-hero p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 650px;
+        }
+
+        /* Contact Section Grid Layout */
+        .contact-container {
+            max-width: 1400px;
+            margin: 0 auto 4rem;
+            padding: 0 6%;
+            width: 100%;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 3rem;
+        }
+
+        @media (max-width: 1024px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Left Column: Info */
+        .contact-info {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            padding: 3rem;
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .contact-info h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .info-block {
+            margin-bottom: 2rem;
+        }
+
+        .info-block h4 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .info-block span {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--platinum);
+        }
+
+        /* Right Column: Form */
+        .contact-form-wrapper {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            padding: 3rem;
+            border-radius: 6px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            background: var(--bg-obsidian);
+            border: 1px solid var(--border-subtle);
+            padding: 0.9rem 1rem;
+            color: var(--platinum);
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-family: var(--font-main);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        .btn-submit {
+            background: var(--platinum);
+            color: var(--bg-obsidian);
+            padding: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 1rem;
+        }
+
+        .btn-submit:hover {
+            background: #FFFFFF;
+        }
+
+        /* Legal Section Styles (Imprint, Privacy, Terms) */
+        .legal-section {
+            max-width: 1400px;
+            margin: 0 auto 6rem;
+            padding: 0 6%;
+            width: 100%;
+        }
+
+        .legal-wrapper {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            padding: 3.5rem;
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .legal-block h2 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            margin-bottom: 1rem;
+            color: var(--platinum);
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 0.75rem;
+        }
+
+        .legal-block h3 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-top: 1.2rem;
+            margin-bottom: 0.4rem;
+            color: var(--platinum);
+        }
+
+        .legal-block p, .legal-block ul {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .legal-block ul {
+            padding-left: 1.2rem;
+        }
+
+        .legal-block li {
+            margin-bottom: 0.4rem;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-subtle);
+            padding: 3rem 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            margin-top: auto;
+            text-transform: uppercase;
+        }
+
+        footer div {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        footer a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        footer a:hover {
+            color: var(--platinum);
+        }
+
+        /* Mobile Responsiveness Rules */
+        @media (max-width: 900px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 75%;
+                height: 100vh;
+                background: rgba(10, 10, 10, 0.98);
+                backdrop-filter: blur(15px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                padding: 4rem;
+                gap: 2.5rem;
+                transition: right 0.4s ease-in-out;
+                border-left: 1px solid var(--border-subtle);
+                box-shadow: -10px 0 30px rgba(0,0,0,0.8);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 1.1rem;
+            }
+
+            .nav-cta {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .menu-toggle.active span:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .menu-toggle.active span:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .contact-hero {
+                padding: 4rem 6% 2rem;
+            }
+
+            .contact-info, .contact-form-wrapper, .legal-wrapper {
+                padding: 2rem;
+            }
+
+            footer {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            footer div {
+                justify-content: center;
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Executive Navigation -->
+    <nav>
+        <a href="index.html" class="logo">Lemon Music <span>Group</span></a>
+        
+        <div class="nav-links" id="navLinks">
+            <a href="index.html">Infrastructure</a>
+            <a href="sync.html">Sync & Licensing</a>
+            <a href="distribution.html">Distribution</a>
+            <a href="shop.html">Loop Shop</a>
+            <a href="contact.html" class="active">Contact</a>
+        </div>
+
+        <a href="contact.html" class="nav-cta">Partner Portal</a>
+
+        <!-- Mobile Hamburger Trigger -->
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Contact Hero -->
+    <header class="contact-hero fade-in">
+        <div class="contact-hero-tag">Direct Communication Pipeline</div>
+        <h1>Partner Portal & Legal Disclosures</h1>
+        <p>Get in touch for global distribution submissions, sync licensing deals, institutional collaborations, or review our legal compliance details below.</p>
+    </header>
+
+    <!-- Content Sections -->
+    <section class="contact-container fade-in">
+        <div class="contact-grid">
+            
+            <!-- Info Box -->
+            <div class="contact-info">
+                <div>
+                    <h3>Direct Desk</h3>
+                    <p>All releases must be submitted and coordinated directly through our team prior to distribution.</p>
+                    
+                    <div class="info-block">
+                        <h4>Inquiry Response Window</h4>
+                        <span>Within 24 – 48 Hours</span>
+                    </div>
+
+                    <div class="info-block">
+                        <h4>Distribution Lead Time Note</h4>
+                        <span>Min. 3 Weeks prior to release date</span>
+                    </div>
+
+                    <div class="info-block">
+                        <h4>Commercial Model</h4>
+                        <span>0% Upfront Fee / 20% Revenue Split</span>
+                    </div>
+                </div>
+
+                <div class="info-block" style="margin-bottom: 0;">
+                    <h4>Direct Dispatch</h4>
+                    <span>contact@lemonmusicgroup.com</span>
+                </div>
+            </div>
+
+            <!-- Form Box -->
+            <div class="contact-form-wrapper">
+                <form class="contact-form" action="https://formspree.io/f/mqalwljw" method="POST">
+                    
+                    <div class="form-group">
+                        <label for="name">Full Name / Artist Name</label>
+                        <input type="text" id="name" name="name" required placeholder="e.g. John Doe">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required placeholder="name@domain.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">Inquiry Category</label>
+                        <select id="category" name="category" required>
+                            <option value="" disabled selected>Select category...</option>
+                            <option value="Distribution">Song Distribution (3+ weeks notice required)</option>
+                            <option value="Sync & Licensing">Sync & Licensing Pitch</option>
+                            <option value="Loop Shop Support">Loop Shop Order Support</option>
+                            <option value="General Partnership">General Partnership</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message / Project Details (Audio Links, Track Title, Release Date)</label>
+                        <textarea id="message" name="message" required placeholder="Provide audio links, planned release date (must be 3+ weeks away), and track details..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Transmit Message</button>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Legal Disclosure Section (Imprint, Privacy, Terms) -->
+    <section class="legal-section fade-in">
+        <div class="legal-wrapper">
+            
+            <!-- Imprint / Legal Notice -->
+            <div class="legal-block">
+                <h2>1. Imprint / Legal Notice</h2>
+                <p>Information according to legal requirements:</p>
+                <h3>Lemon Music Group</h3>
+                <p>
+                    Managing Entity / Representative: Lemon Music Group Management<br>
+                    Contact Email: contact@lemonmusicgroup.com<br>
+                    Website: lemonmusicgroup.com
+                </p>
+                <h3>Dispute Resolution</h3>
+                <p>The European Commission provides a platform for online dispute resolution (ODR): <a href="https://ec.europa.eu/consumers/odr/" target="_blank" style="color: var(--platinum);">https://ec.europa.eu/consumers/odr/</a>. We are neither obliged nor willing to participate in dispute resolution proceedings before a consumer arbitration board.</p>
+            </div>
+
+            <!-- Privacy Policy -->
+            <div class="legal-block">
+                <h2>2. Privacy Policy</h2>
+                <p>Protecting your personal data is of utmost importance to us. When you use our contact form or partner portal, we process data solely to handle your inquiry or project submission.</p>
+                <h3>Data Processing via Contact Form</h3>
+                <p>Data entered in our forms (Name, Email, Inquiry Category, Message) is transmitted securely via Formspree to our internal management team. We do not sell, rent, or trade your personal or musical data to third parties.</p>
+                <h3>Server Log Files</h3>
+                <p>Our hosting infrastructure automatically collects and stores standard technical information transmitted by your browser (such as IP address, browser type, operating system, and time of access) to ensure system stability and security.</p>
+            </div>
+
+            <!-- Terms and Conditions (AGB) -->
+            <div class="legal-block">
+                <h2>3. Terms & Conditions (AGB)</h2>
+                <h3>Scope & Services</h3>
+                <p>These terms govern the relationship between Lemon Music Group and artists, creators, or clients utilizing our distribution infrastructure, sync licensing pitches, and loop shop assets.</p>
+                <h3>Distribution Agreement & Revenue Split</h3>
+                <p>By submitting music for global distribution through Lemon Music Group:</p>
+                <ul>
+                    <li>You guarantee that you own or control all necessary rights (masters and publishing) to the submitted sound recordings.</li>
+                    <li>Releases must be submitted at least 3 weeks prior to the scheduled launch date.</li>
+                    <li>No upfront fees apply; Lemon Music Group retains a standard 20% revenue share from generated royalties, while 80% remains with the artist.</li>
+                </ul>
+                <h3>Loop Shop & Digital Assets</h3>
+                <p>All loop kits, sound packs, and digital goods purchased via our loop shop are licensed, not sold, granting the user a non-exclusive right to use the audio elements in their musical productions according to standard industry licensing terms.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Lemon Music Group. All rights reserved.</p>
+        <div>
+            <a href="index.html">Infrastructure</a>
+            <a href="sync.html">Sync & Licensing</a>
+            <a href="distribution.html">Distribution</a>
+        </div>
+    </footer>
+
+    <!-- Script for Mobile Menu & Animations -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+
+            menuToggle.addEventListener('click', () => {
+                menuToggle.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    menuToggle.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+            
+            setTimeout(() => {
+                document.querySelector('.contact-hero').classList.add('visible');
+            }, 100);
+        });
+    </script>
+
+</body>
+</html>

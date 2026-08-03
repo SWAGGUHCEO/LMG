@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lemon Music Group | Sync & Licensing Infrastructure</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --bg-obsidian: #060606;
+            --bg-surface: #101010;
+            --bg-surface-hover: #161616;
+            --platinum: #E5E5E5;
+            --text-muted: #737373;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --font-main: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-main);
+        }
+
+        body {
+            background-color: var(--bg-obsidian);
+            color: var(--platinum);
+            line-height: 1.5;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Executive Navigation & Mobile Hamburger */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 6%;
+            border-bottom: 1px solid var(--border-subtle);
+            background: rgba(6, 6, 6, 0.95);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.15rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--platinum);
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: color 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--platinum);
+        }
+
+        .nav-cta {
+            background: var(--platinum);
+            color: var(--bg-obsidian);
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .nav-cta:hover {
+            background: #FFFFFF;
+        }
+
+        /* Hamburger Menu Toggle Button */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 5px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background: var(--platinum);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        /* Sync Hero */
+        .sync-hero {
+            padding: 6rem 6% 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .sync-hero-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+            margin-bottom: 1.2rem;
+            font-weight: 600;
+        }
+
+        .sync-hero h1 {
+            font-size: clamp(2.2rem, 4.5vw, 4.5rem);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -1.5px;
+            margin-bottom: 1rem;
+        }
+
+        .sync-hero p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 650px;
+        }
+
+        /* Content Layout */
+        .sync-container {
+            max-width: 1400px;
+            margin: 0 auto 6rem;
+            padding: 0 6%;
+            width: 100%;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .sync-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            padding: 3rem 2.5rem;
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .sync-card:hover {
+            background: var(--bg-surface-hover);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .sync-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .sync-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .sync-list {
+            list-style: none;
+            margin-bottom: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .sync-list li {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--platinum);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sync-list li::before {
+            content: "—";
+            color: var(--text-muted);
+        }
+
+        .btn-action {
+            background: var(--platinum);
+            color: var(--bg-obsidian);
+            padding: 0.9rem 1.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-align: center;
+            transition: background 0.2s;
+            display: inline-block;
+        }
+
+        .btn-action:hover {
+            background: #FFFFFF;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-subtle);
+            padding: 3rem 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            margin-top: auto;
+            text-transform: uppercase;
+        }
+
+        footer div {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        footer a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        footer a:hover {
+            color: var(--platinum);
+        }
+
+        /* Mobile Responsiveness Rules */
+        @media (max-width: 900px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 75%;
+                height: 100vh;
+                background: rgba(10, 10, 10, 0.98);
+                backdrop-filter: blur(15px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                padding: 4rem;
+                gap: 2.5rem;
+                transition: right 0.4s ease-in-out;
+                border-left: 1px solid var(--border-subtle);
+                box-shadow: -10px 0 30px rgba(0,0,0,0.8);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 1.1rem;
+            }
+
+            .nav-cta {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .menu-toggle.active span:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .menu-toggle.active span:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .sync-hero {
+                padding: 4rem 6% 2rem;
+            }
+
+            footer {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            footer div {
+                justify-content: center;
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Executive Navigation -->
+    <nav>
+        <a href="index.html" class="logo">Lemon Music <span>Group</span></a>
+        
+        <div class="nav-links" id="navLinks">
+            <a href="index.html">Infrastructure</a>
+            <a href="sync.html" class="active">Sync & Licensing</a>
+            <a href="distribution.html">Distribution</a>
+            <a href="shop.html">Loop Shop</a>
+            <a href="contact.html">Contact</a>
+        </div>
+
+        <a href="contact.html" class="nav-cta">Partner Portal</a>
+
+        <!-- Mobile Hamburger Trigger -->
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Sync Hero -->
+    <header class="sync-hero fade-in">
+        <div class="sync-hero-tag">Commercial & Institutional Rights Management</div>
+        <h1>Sync & Licensing</h1>
+        <p>Connecting elite independent catalogs directly with global advertising agencies, film production houses, television networks, and interactive gaming studios.</p>
+    </header>
+
+    <!-- Content Sections -->
+    <section class="sync-container fade-in">
+        <div class="grid-2">
+            
+            <div class="sync-card">
+                <div>
+                    <h3>Brand & Advertising Placements</h3>
+                    <p>We work closely with global media supervisors to pitch and secure high-impact placements for commercial brands, digital ad campaigns, and promotional trailers.</p>
+                    <ul class="sync-list">
+                        <li>Global Campaign Clearance</li>
+                        <li>Fast-Track Master & Publishing Split</li>
+                        <li>Direct Agency Pitching</li>
+                    </ul>
+                </div>
+                <a href="contact.html" class="btn-action">Submit Catalog for Pitching</a>
+            </div>
+
+            <div class="sync-card">
+                <div>
+                    <h3>Film, TV & Gaming Integration</h3>
+                    <p>Our team handles complex synchronization deals across cinematic releases, streaming network series, and multi-platform video game productions.</p>
+                    <ul class="sync-list">
+                        <li>Episodic & Feature Film Clearance</li>
+                        <li>Interactive Soundtracks & Trailers</li>
+                        <li>Institutional Rights Protection</li>
+                    </ul>
+                </div>
+                <a href="contact.html" class="btn-action">Request Supervisor Access</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Lemon Music Group. All rights reserved.</p>
+        <div>
+            <a href="index.html">Infrastructure</a>
+            <a href="shop.html">Loop Shop</a>
+            <a href="contact.html">Inquiries</a>
+        </div>
+    </footer>
+
+    <!-- Script for Mobile Menu & Animations -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+
+            menuToggle.addEventListener('click', () => {
+                menuToggle.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    menuToggle.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+            
+            setTimeout(() => {
+                document.querySelector('.sync-hero').classList.add('visible');
+            }, 100);
+        });
+    </script>
+
+</body>
+</html>
